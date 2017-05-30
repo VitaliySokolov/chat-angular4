@@ -1,0 +1,31 @@
+<md-toolbar color="primary">
+  <nav class="main-navbar">
+    <button
+      md-button routerLink="/home"
+      routerLinkActive="active"
+      mdTooltip="Home">
+        <md-icon color="secondary">home</md-icon>
+    </button>
+    <button
+      md-button routerLink="/chats"
+      routerLinkActive="active"
+      mdTooltip="Chats">
+        <md-icon color="secondary">chat</md-icon>
+    </button>
+    <span class="spacer"></span>
+    <button
+      md-button routerLink="/login"
+      routerLinkActive="active"
+      mdTooltip="Login">
+        <md-icon color="secondary">exit_to_app</md-icon>
+    </button>
+    <button
+      md-button routerLink="/register"
+      routerLinkActive="active"
+      mdTooltip="Register">
+        <md-icon color="secondary">assignment</md-icon>
+    </button>
+  </nav>
+</md-toolbar>
+
+<router-outlet></router-outlet>
