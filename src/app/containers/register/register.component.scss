@@ -1,0 +1,25 @@
+:host {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  min-width: 300px;
+  max-width: 1200px;
+  margin: 10px auto;
+}
+
+.register-form {
+  width: 300px;
+}
+
+.form-group {
+  margin-top: 15px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.register-btn {
+  width: 100%;
+  border-radius: 10px;
+}
