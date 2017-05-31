@@ -1,9 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
-// import {} from '@angular/animations';
 import { MaterialModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import 'hammerjs';
@@ -14,6 +13,7 @@ import { LoginComponent } from './containers/login/login.component';
 import { RegisterComponent } from './containers/register/register.component';
 import { ChatsComponent } from './containers/chats/chats.component';
 import { SidebarComponent } from './containers/sidebar/sidebar.component';
+import { ComponentsModule } from './components/components.module';
 
 import { routes } from './routes';
 
@@ -24,15 +24,17 @@ import { routes } from './routes';
     LoginComponent,
     RegisterComponent,
     ChatsComponent,
-    SidebarComponent
+    SidebarComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     MaterialModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(routes, { useHash: true }),
+    ComponentsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
