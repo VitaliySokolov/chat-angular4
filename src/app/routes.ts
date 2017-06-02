@@ -1,9 +1,9 @@
 import { Routes } from '@angular/router';
 
 import { HomeComponent } from './containers/home/home.component';
-import { ChatsComponent } from './containers/chats/chats.component';
 import { LoginComponent } from './containers/login/login.component';
 import { RegisterComponent } from './containers/register/register.component';
+import { NotFoundComponent } from './containers/not-found/not-found.component';
 
 export const routes: Routes = [
   {
@@ -17,7 +17,8 @@ export const routes: Routes = [
   },
   {
     path: 'chats',
-    component: ChatsComponent,
+    // component: ChatsComponent,
+    loadChildren: './chats/chats.module#ChatsModule'
   },
   {
     path: 'login',
@@ -26,5 +27,9 @@ export const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent
+  },
+  {
+    path: '**',
+    component: NotFoundComponent
   }
 ];

@@ -1,5 +1,5 @@
 <main>
-  <form novalidate [formGroup]="loginForm" class="login-form">
+  <form novalidate [formGroup]="loginForm" class="login-form" (ngSubmit)="onSubmit()">
     <div class="login-info">
     </div>
     <div class="form-group">
@@ -15,7 +15,7 @@
     </md-input-container>
     </div>
     <div class="form-group">
-      <button md-button color="primary" class="login-btn" [disabled]="loginForm.pristine || loginForm.invalid">Login</button>
+      <button type="submit" md-button color="primary" class="login-btn" [disabled]="loginForm.pristine || loginForm.invalid">Login</button>
     </div>
   </form>
 </main>

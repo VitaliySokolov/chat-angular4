@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { Store } from '@ngrx/store';
+import * as fromRoot from '../../reducers';
+import * as auth from '../../actions/auth';
+
 @Component({
   selector: 'ct-login',
   templateUrl: './login.component.html',
@@ -9,7 +13,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private store: Store<fromRoot.State>
+  ) {
     this.createForm();
    }
 
@@ -23,4 +30,13 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  onSubmit() {
+    const data = this.loginForm.value;
+    const user = {
+      username: data.login,
+      password: data.password
+    }
+
+    this.store.dispatch(new auth.LoginAction(user));
+  }
 }

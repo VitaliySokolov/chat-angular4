@@ -19,7 +19,6 @@ export class WsService {
         this.socket.on('unauthorized', err => {
           observer.error({error: err.message});
         });
-        console.log(tokenObj);
         this.socket.emit('authenticate', tokenObj);
       });
     });
