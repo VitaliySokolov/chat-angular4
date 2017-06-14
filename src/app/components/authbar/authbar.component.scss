@@ -1,0 +1,19 @@
+.wrapper {
+  display: flex;
+  padding: 5px;
+  align-items: center;
+  // height: 100%;
+}
+
+.green {
+  background-color: green !important;
+}
+
+.avatar {
+  background-color: #fff;
+  width: 50px;
+  display: inline-block;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 5px;
+}

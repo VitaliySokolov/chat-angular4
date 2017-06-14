@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Action } from '@ngrx/store';
 import { Actions, Effect, toPayload } from '@ngrx/effects';
 import { Observable } from 'rxjs/Observable';
@@ -14,13 +15,16 @@ export class AuthEffects {
     .map(toPayload)
     .switchMap(payload =>
       this.authService.login(payload)
+        .map(res => res.json())
         .map(res => {
-          const user = res.json();
-          // new auth.AuthenticateAction({ token: user.token });
-          // this.wsService.authenticateUser(user.token);
-          return { type: auth.LOGIN_SUCCESS, payload: user };
+          const userId = res.user.id;
+          localStorage.setItem('user', userId);
+          localStorage.setItem(userId, JSON.stringify(res));
+          this.router.navigate(['/chats']);
+          return { type: auth.LOGIN_SUCCESS, payload: res };
         })
         .catch(res => {
+          console.error(res);
           return Observable
             .of({
               type: auth.LOGIN_FAILED,
@@ -31,8 +35,16 @@ export class AuthEffects {
         })
     );
 
+  @Effect({dispatch: false}) logout$: Observable<Action> = this.actions$
+    .ofType(auth.LOGOUT)
+    .do(() => {
+      localStorage.removeItem('user');
+      this.router.navigate(['/home']);
+    });
+
   constructor(
     private authService: AuthService,
-    private actions$: Actions
+    private actions$: Actions,
+    private router: Router
   ) { }
 }

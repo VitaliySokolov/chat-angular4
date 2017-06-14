@@ -13,17 +13,24 @@
         <md-icon color="secondary">chat</md-icon>
     </button>
     <span class="spacer"></span>
-    <button
+    <button *ngIf="!(logged$ | async)"
       md-button routerLink="/login"
       routerLinkActive="active"
       mdTooltip="Login">
-        <md-icon color="secondary">exit_to_app</md-icon>
+        <md-icon color="secondary" alt="login">exit_to_app</md-icon>
     </button>
-    <button
+    <button *ngIf="!(logged$ | async)"
       md-button routerLink="/register"
       routerLinkActive="active"
       mdTooltip="Register">
         <md-icon color="secondary">assignment</md-icon>
+    </button>
+    <ct-authbar *ngIf="logged$ | async" [user]="user$ | async" [online]="connected$ | async"></ct-authbar>
+    <button *ngIf="logged$ | async"
+      md-button
+      (click)="handleLogoutClick()"
+      mdTooltip="Logout">
+         <md-icon color="secondary"><ct-logout></ct-logout></md-icon>
     </button>
   </nav>
 </md-toolbar>

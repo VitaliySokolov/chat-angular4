@@ -24,7 +24,9 @@ export function createReducer(asyncReducers = {}): ActionReducer<any> {
   return combineReducers(Object.assign(reducers, asyncReducers));
 }
 
-export const reducer = createReducer();
+export function reducer(state: any, action: any) {
+  return createReducer()(state, action);
+}
 
 export const getAuthState = (state: State) => state.auth;
 export const getLogged = createSelector(getAuthState, fromAuth.getLogged);
@@ -32,3 +34,4 @@ export const getLogging = createSelector(getAuthState, fromAuth.getLogging);
 export const getRegistered = createSelector(getAuthState, fromAuth.getRegistered);
 export const getRegistering = createSelector(getAuthState, fromAuth.getRegistering);
 export const getToken = createSelector(getAuthState, fromAuth.getToken);
+export const getUser = createSelector(getAuthState, fromAuth.getUser);

@@ -26,24 +26,23 @@ export class ChatsComponent implements OnInit, OnDestroy {
     private wsService: WsService
   ) {
     this.store.replaceReducer(chatRoot.extendedReducer);
-    this.authenticated$ = this.store.select(chatRoot.getAuthenticated);
-    this.authenticating$ = this.store.select(chatRoot.getAuthenticating);
-    this.logged$ = this.store.select(appRoot.getLogged);
-    this.token$ = this.store.select(appRoot.getToken);
-
-    this.subscriptions.push(
-      Observable.combineLatest(this.authenticated$, this.logged$, this.token$).subscribe(values => {
-        const [authenticated, logged, token] = values;
-        if (logged && !authenticated && token) {
-          this.store
-            .dispatch(new wsAuth.AuthenticateAction({ token }));
-        }
-      })
-    );
+    // this.authenticated$ = this.store.select(chatRoot.getAuthenticated);
+    // this.authenticating$ = this.store.select(chatRoot.getAuthenticating);
+    // this.logged$ = this.store.select(appRoot.getLogged);
+    // this.token$ = this.store.select(appRoot.getToken);
+    // this.wsService.initSocket();
   }
 
   ngOnInit() {
-
+    // this.subscriptions.push(
+    //   Observable.combineLatest(this.authenticated$, this.logged$, this.token$).subscribe(values => {
+    //     const [authenticated, logged, token] = values;
+    //     if (logged && !authenticated && token) {
+    //       this.store
+    //         .dispatch(new wsAuth.AuthenticateAction({ token }));
+    //     }
+    //   })
+    // );
   }
 
   ngOnDestroy() {

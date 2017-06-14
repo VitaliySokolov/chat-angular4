@@ -23,3 +23,6 @@ export const getAuthenticated = createSelector(
 export const getError = createSelector(
   getWsAuthState, fromWsAuth.getError
 );
+export const getConnected = createSelector(
+  getWsAuthState, fromWsAuth.getConnected
+);

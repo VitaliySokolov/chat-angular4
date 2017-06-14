@@ -10,6 +10,7 @@ const MINIMUM_LENGTH = `Minimum length is ${MIN_LENGTH} characters.`;
 const MAXIMUM_LENGTH = `Maximum length is ${MAX_LENGTH} characters.`;
 const INVALID_LOGIN = 'Please create a login with only alphanumeric characters.';
 const loginRegex: RegExp = /^[a-zA-Z0-9]+$/;
+// tslint:disable-next-line:max-line-length
 const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 @Component({
@@ -18,18 +19,14 @@ const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-  registerForm: FormGroup;
-  login: string = '';
-  email: string = '';
-  password: string = '';
-  confirmPassword: string = '';
+  private registerForm: FormGroup;
 
   formErrors = {
     'login': REQUIRED_FIELD_ERROR,
     'email': REQUIRED_FIELD_ERROR,
     'password': REQUIRED_FIELD_ERROR,
     'confirmPassword': REQUIRED_FIELD_ERROR
-  }
+  };
 
   validationMessages = {
     'login': {
@@ -52,7 +49,7 @@ export class RegisterComponent implements OnInit {
       'minlength': MINIMUM_LENGTH,
       'notEqualPasswords': PASSWORDS_MISMATCH_ERROR,
     }
-  }
+  };
 
   constructor(private fb: FormBuilder) {
     this.createForm();
@@ -132,7 +129,7 @@ export class RegisterComponent implements OnInit {
       if (otherControl.value !== thisControl.value) {
         return {
           'notEqualPasswords': true
-        }
+        };
       }
       return null;
     };

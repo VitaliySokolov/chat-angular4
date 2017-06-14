@@ -57,6 +57,10 @@ export function reducer(state = initialState, action): State {
       };
     }
 
+    case auth.LOGOUT: {
+      return initialState;
+    }
+
     default: {
       return state;
     }
@@ -68,3 +72,7 @@ export const getLogging = (state: State) => state.logging;
 export const getRegistered = (state: State) => state.registered;
 export const getRegistering = (state: State) => state.registering;
 export const getToken = (state: State) => state.token;
+export const getUser = (state: State) => ({
+  id: state.id,
+  name: state.name
+});
