@@ -3,12 +3,14 @@ import * as wsAuth from '../actions/ws-auth';
 export interface State {
   authenticating: boolean;
   authenticated: boolean;
+  connected: boolean;
   error: string;
 };
 
 export const initialState: State = {
   authenticating: false,
   authenticated: false,
+  connected: false,
   error: '',
 };
 
@@ -40,6 +42,17 @@ export function reducer(state = initialState, action): State {
       };
     }
 
+    case wsAuth.CONNECT: {
+      return {
+        ...state,
+        connected: true
+      };
+    }
+
+    case wsAuth.DISCONNECT: {
+      return initialState;
+    }
+
     default: {
       return state;
     }
@@ -49,3 +62,4 @@ export function reducer(state = initialState, action): State {
 export const getAuthenticated = (state: State) => state.authenticated;
 export const getAuthenticating = (state: State) => state.authenticating;
 export const getError = (state: State) => state.error;
+export const getConnected = (state: State) => state.connected;
