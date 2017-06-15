@@ -31,6 +31,25 @@ export class AuthEffects {
         })
     );
 
+  @Effect() register$: Observable<Action> = this.actions$
+    .ofType(auth.REGISTER)
+    .map(toPayload)
+    .switchMap(payload =>
+      this.authService.register(payload)
+        .map(res => {
+          return { type: auth.REGISTER_SUCCESS};
+        })
+        .catch(res => {
+          return Observable
+            .of({
+              type: auth.REGISTER_FAILED,
+              payload: res.status
+                ? res.json()
+                : { error: 'unknown error' }
+            });
+        })
+    );
+
   constructor(
     private authService: AuthService,
     private actions$: Actions

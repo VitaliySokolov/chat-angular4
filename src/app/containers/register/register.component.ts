@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
+import { Store } from '@ngrx/store';
+
+import * as auth from '../../actions/auth';
+import * as fromRoot from '../../reducers';
 
 const MIN_LENGTH = 4;
 const MAX_LENGTH = 24;
@@ -54,7 +58,10 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private store: Store<fromRoot.State>
+  ) {
     this.createForm();
   }
 
@@ -136,6 +143,17 @@ export class RegisterComponent implements OnInit {
       }
       return null;
     };
+  }
+
+  onSubmit() {
+    const data = this.registerForm.value;
+    const user = {
+      username: data.login,
+      email: data.email,
+      password: data.password
+    }
+
+    this.store.dispatch(new auth.RegisterAction(user));
   }
 }
 

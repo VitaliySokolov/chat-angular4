@@ -57,6 +57,32 @@ export function reducer(state = initialState, action): State {
       };
     }
 
+    case auth.REGISTER: {
+      return {
+        ...state,
+        registering: true,
+        registered: false
+      }
+    }
+
+    case auth.REGISTER_SUCCESS: {
+      return {
+        ...state,
+        registering: false,
+        registered: true
+      }
+    }
+
+    case auth.REGISTER_FAILED: {
+      const { error } = action.payload;
+      return {
+        ...state,
+        registering: false,
+        registered: false,
+        error,
+      }
+    }
+
     default: {
       return state;
     }

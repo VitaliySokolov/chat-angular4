@@ -15,4 +15,9 @@ export class AuthService {
     return this.http
       .post(API_LOGIN, user, options);
   }
+
+  register(user: any): Observable<any> {
+    return this.http
+    .post(API_SIGNUP, user, options);
+  }
 }
