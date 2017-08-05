@@ -4,8 +4,8 @@ import { Actions, Effect, toPayload } from '@ngrx/effects';
 import { Observable } from 'rxjs/Observable';
 
 import { WsService } from '../services/ws.service';
+import * as auth from '../actions/auth';
 import * as wsAuth from '../actions/ws-auth';
-import * as auth from '../../actions/auth';
 
 @Injectable()
 export class WsAuthEffects {

@@ -4,8 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/observable/combineLatest';
 
-import * as appRoot from '../../../reducers';
-import * as chatRoot from '../../reducers';
+import * as appRoot from '../../reducers';
 import * as wsAuth from '../../actions/ws-auth';
 import { WsService } from '../../services/ws.service';
 
@@ -22,10 +21,9 @@ export class ChatsComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = [];
 
   constructor(
-    private store: Store<chatRoot.ExtendedState>,
-    private wsService: WsService
+    // private store: Store<appRoot.State>,
+    // private wsService: WsService
   ) {
-    this.store.replaceReducer(chatRoot.extendedReducer);
     // this.authenticated$ = this.store.select(chatRoot.getAuthenticated);
     // this.authenticating$ = this.store.select(chatRoot.getAuthenticating);
     // this.logged$ = this.store.select(appRoot.getLogged);

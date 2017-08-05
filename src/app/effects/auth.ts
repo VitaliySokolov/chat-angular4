@@ -3,9 +3,12 @@ import { Router } from '@angular/router';
 import { Action } from '@ngrx/store';
 import { Actions, Effect, toPayload } from '@ngrx/effects';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/from';
+import 'rxjs/add/operator/mergeMap';
 
 import { AuthService } from '../services/auth.service';
 import * as auth from '../actions/auth';
+import * as wsAuth from '../actions/ws-auth';
 
 @Injectable()
 export class AuthEffects {
@@ -21,7 +24,8 @@ export class AuthEffects {
           localStorage.setItem('user', userId);
           localStorage.setItem(userId, JSON.stringify(res));
           this.router.navigate(['/chats']);
-          return { type: auth.LOGIN_SUCCESS, payload: res };
+
+          return new auth.LoginSuccessAction(res);
         })
         .catch(res => {
           console.error(res);
@@ -33,7 +37,9 @@ export class AuthEffects {
                 : { error: 'unknown error' }
             });
         })
-    );
+    ).mergeMap((data: any) => {
+      return [data, new wsAuth.AuthenticateAction({token: data.payload.token})];
+    });
 
   @Effect({dispatch: false}) logout$: Observable<Action> = this.actions$
     .ofType(auth.LOGOUT)

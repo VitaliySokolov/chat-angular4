@@ -20,3 +20,16 @@ export class AutoLoginAction implements Action {
 export class LogoutAction implements Action {
   readonly type = LOGOUT;
 }
+
+
+export class LoginSuccessAction implements Action {
+  readonly type = LOGIN_SUCCESS;
+
+  constructor(public payload?: any) { }
+}
+
+export class LoginFailedAction implements Action {
+  readonly type = LOGIN_FAILED;
+
+  constructor(public payload?: any) { }
+}

@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 
 import { HomeComponent } from './containers/home/home.component';
 import { LoginComponent } from './containers/login/login.component';
+import { ChatsComponent } from './containers/chats/chats.component';
 import { RegisterComponent } from './containers/register/register.component';
 import { NotFoundComponent } from './containers/not-found/not-found.component';
 
@@ -17,8 +18,7 @@ export const routes: Routes = [
   },
   {
     path: 'chats',
-    // component: ChatsComponent,
-    loadChildren: './chats/chats.module#ChatsModule'
+    component: ChatsComponent,
   },
   {
     path: 'login',
