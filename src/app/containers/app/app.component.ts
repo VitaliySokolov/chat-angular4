@@ -38,8 +38,11 @@ export class AppComponent implements OnInit {
   autoLogin() {
     const userId = localStorage.getItem('user');
     if (userId) {
-      const payload = JSON.parse(localStorage.getItem(userId));
-      this.store.dispatch(new Auth.AutoLoginAction(payload));
+      const userInfo = localStorage.getItem(userId);
+      if (userInfo) {
+        const payload = JSON.parse(userInfo);
+        this.store.dispatch(new Auth.LoginSuccessAction(payload));
+      }
     }
   }
 
