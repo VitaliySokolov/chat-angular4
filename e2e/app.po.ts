@@ -5,7 +5,7 @@ export class ChatAngular4Page {
     return browser.get('/');
   }
 
-  getParagraphText() {
-    return element(by.css('app-root h1')).getText();
+  getDemoText() {
+    return element(by.css('.demo-title')).getText();
   }
 }

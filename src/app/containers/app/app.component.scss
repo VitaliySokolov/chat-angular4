@@ -1,8 +1,9 @@
 .main-navbar {
-  flex: 1;
   display: flex;
-  max-width: 1200px;
+  flex: 1;
+  height: inherit;
   margin: 0 auto;
+  max-width: 1200px;
 }
 
 .active {

@@ -4,18 +4,18 @@
     </div>
     <div class="form-group">
     <md-input-container class="full-width">
-      <input mdInput formControlName="login" placeholder="Login" name="login" type="text" />
+      <input mdInput formControlName="login" placeholder="Login" name="login" id="login" type="text" />
       <md-error>This field is required</md-error>
     </md-input-container>
     </div>
     <div class="form-group">
     <md-input-container class="full-width">
-      <input mdInput formControlName="password" placeholder="Password" name="password" type="password" />
+      <input mdInput formControlName="password" placeholder="Password" name="password" id="password" type="password" />
       <md-error>This field is required</md-error>
     </md-input-container>
     </div>
     <div class="form-group">
-      <button type="submit" md-button color="primary" class="login-btn" [disabled]="loginForm.pristine || loginForm.invalid">Login</button>
+      <button type="submit" md-button color="primary" class="login-btn" id="submit" [disabled]="loginForm.pristine || loginForm.invalid">Login</button>
     </div>
   </form>
 </main>

@@ -19,5 +19,10 @@ export class AuthService {
   register(user: any): Observable<any> {
     return this.http
     .post(API_SIGNUP, user, options);
+
+  saveLoginInfo(data: any) {
+    const userId = data.user.id;
+    localStorage.setItem('user', userId);
+    localStorage.setItem(userId, JSON.stringify(data));
   }
 }

@@ -1,4 +1,8 @@
-.wrapper {
+:host {
+  display: flex;
+}
+
+.authbar-wrapper {
   display: flex;
   padding: 5px;
   align-items: center;

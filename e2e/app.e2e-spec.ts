@@ -9,6 +9,6 @@ describe('chat-angular4 App', () => {
 
   it('should display message saying app works', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('app works!');
+    expect(page.getDemoText()).toEqual('Demo Chat App using Angular 4');
   });
 });

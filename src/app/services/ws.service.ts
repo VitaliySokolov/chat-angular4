@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import * as io from 'socket.io-client';
-import { SERVER } from '../../config';
+import { SERVER } from '../config';
 import { Observable } from 'rxjs/Observable';
 
-import * as appRoot from '../../reducers';
-import * as chatRoot from '../reducers';
+import * as appRoot from '../reducers';
 import { Store } from '@ngrx/store';
 import * as wsAuth from '../actions/ws-auth';
 
@@ -13,15 +12,19 @@ export class WsService {
   private socket: SocketIOClient.Socket;
   private token: string;
   private authed: boolean;
+  private connected = false;
 
   constructor(
-    private store: Store<chatRoot.ExtendedState>
+    private store: Store<appRoot.State>
   ) {
     console.log('ws start');
     this.initSocket();
     this.store
       .select(appRoot.getToken)
       .subscribe(token => this.token = token);
+    this.store
+      .select(appRoot.getConnected)
+      .subscribe(connected => this.connected = connected);
   }
 
   // authenticateUser(tokenObj) {
@@ -40,7 +43,12 @@ export class WsService {
   // }
   authenticateUser(tokenObj) {
     console.log('before auth');
-    this.socket.emit('authenticate', tokenObj);
+    console.log(this.socket);
+    if (!this.connected) {
+      this.reconnect();
+    } else {
+      this.socket.emit('authenticate', tokenObj);
+    }
   }
 
   getSocket() {

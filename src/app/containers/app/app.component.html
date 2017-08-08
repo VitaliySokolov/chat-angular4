@@ -27,6 +27,7 @@
     </button>
     <ct-authbar *ngIf="logged$ | async" [user]="user$ | async" [online]="connected$ | async"></ct-authbar>
     <button *ngIf="logged$ | async"
+      id="logout"
       md-button
       (click)="handleLogoutClick()"
       mdTooltip="Logout">
