@@ -24,6 +24,7 @@ export class WsAuthEffects {
   //         payload: err
   //       }))
   //   );
+
   @Effect({ dispatch: false }) authenticate$: Observable<Action> = this.actions$
     .ofType(wsAuth.AUTHENTICATE)
     .map(toPayload)

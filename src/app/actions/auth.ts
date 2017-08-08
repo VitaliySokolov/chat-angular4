@@ -20,12 +20,10 @@ export class RegisterAction implements Action {
 
   constructor(public payload: any) { }
 }
-export class AutoLoginAction implements Action {
 
 export class LogoutAction implements Action {
   readonly type = LOGOUT;
 }
-
 
 export class LoginSuccessAction implements Action {
   readonly type = LOGIN_SUCCESS;
