@@ -1,19 +1,20 @@
-import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { Action } from '@ngrx/store';
-import { Actions, Effect, toPayload } from '@ngrx/effects';
-import { Observable } from 'rxjs/Observable';
+import {Injectable} from '@angular/core';
+import {Router} from '@angular/router';
+import {Action} from '@ngrx/store';
+import {Actions, Effect, toPayload} from '@ngrx/effects';
+import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/from';
 import 'rxjs/add/operator/mergeMap';
 
-import { AuthService } from '../services/auth.service';
+import {AuthService} from '../services/auth.service';
 import * as auth from '../actions/auth';
 import * as wsAuth from '../actions/ws-auth';
 
 @Injectable()
 export class AuthEffects {
 
-  @Effect() login$: Observable<Action> = this.actions$
+  @Effect()
+  login$: Observable<Action> = this.actions$
     .ofType(auth.LOGIN)
     .map(toPayload)
     .switchMap(payload =>
@@ -31,45 +32,56 @@ export class AuthEffects {
           console.error(res);
           return Observable
             .of({
-              type: auth.LOGIN_FAILED,
+              type: auth.LOGIN_FAILURE,
               payload: res.status
                 ? res.json()
-                : { error: 'unknown error' }
+                : {error: 'unknown error'}
             });
         })
-    ).mergeMap((data: any) => {
-      return [data, new wsAuth.AuthenticateAction({token: data.payload.token})];
+    );
+
+  @Effect()
+  loginSuccess$: Observable<Action> = this.actions$
+    .ofType(auth.LOGIN_SUCCESS)
+    .map(toPayload)
+    .switchMap(data => {
+      return Observable.of(new wsAuth.AuthenticateAction({token: data.token}));
     });
 
-  @Effect() register$: Observable<Action> = this.actions$
+
+  @Effect()
+  register$: Observable<Action> = this.actions$
     .ofType(auth.REGISTER)
     .map(toPayload)
     .switchMap(payload =>
       this.authService.register(payload)
         .map(res => {
-          return { type: auth.REGISTER_SUCCESS};
+          return {type: auth.REGISTER_SUCCESS};
         })
         .catch(res => {
           return Observable
             .of({
-              type: auth.REGISTER_FAILED,
+              type: auth.REGISTER_FAILURE,
               payload: res.status
                 ? res.json()
-                : { error: 'unknown error' }
+                : {error: 'unknown error'}
             });
         })
     );
 
-  @Effect({dispatch: false}) logout$: Observable<Action> = this.actions$
+  @Effect()
+  logout$: Observable<Action> = this.actions$
     .ofType(auth.LOGOUT)
     .do(() => {
       localStorage.removeItem('user');
       this.router.navigate(['/home']);
-    });
+    })
+    .switchMap(() =>
+      Observable.of(new wsAuth.DisconnectAction()));
 
   constructor(
     private authService: AuthService,
     private actions$: Actions,
     private router: Router
-  ) { }
+  ) {}
 }

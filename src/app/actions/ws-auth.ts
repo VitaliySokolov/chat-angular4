@@ -2,7 +2,7 @@ import { Action } from '@ngrx/store';
 
 export const AUTHENTICATE = 'AUTHENTICATE';
 export const AUTHENTICATE_SUCCESS = 'AUTHENTICATE_SUCCESS';
-export const AUTHENTICATE_FAILED = 'AUTHENTICATE_FAILED';
+export const AUTHENTICATE_FAILURE = 'AUTHENTICATE_FAILURE';
 export const CONNECT = 'CONNECT';
 export const DISCONNECT = 'DISCONNECT';
 
@@ -18,8 +18,8 @@ export class AuthenticateSuccessAction implements Action {
   constructor(public payload?: any) { }
 }
 
-export class AuthenticateFailedAction implements Action {
-  readonly type = AUTHENTICATE_FAILED;
+export class AuthenticateFailureAction implements Action {
+  readonly type = AUTHENTICATE_FAILURE;
 
   constructor(public payload?: any) { }
 }

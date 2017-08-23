@@ -27,26 +27,11 @@ export class WsService {
       .subscribe(connected => this.connected = connected);
   }
 
-  // authenticateUser(tokenObj) {
-  //   return Observable.create(observer => {
-  //     this.socket = io(SERVER);
-  //     this.socket.on('connect', () => {
-  //       this.socket.on('authenticated', () => {
-  //         observer.next('OK');
-  //       });
-  //       this.socket.on('unauthorized', err => {
-  //         observer.error({ error: err.message });
-  //       });
-  //       this.socket.emit('authenticate', tokenObj);
-  //     });
-  //   });
-  // }
   authenticateUser(tokenObj) {
-    console.log('before auth');
-    console.log(this.socket);
     if (!this.connected) {
       this.reconnect();
     } else {
+      this.socket.open();
       this.socket.emit('authenticate', tokenObj);
     }
   }
@@ -63,12 +48,12 @@ export class WsService {
         console.log('before connect action');
         this.store.dispatch(new wsAuth.ConnectAction());
 
-        this.socket.on('authenticated', (data) => {
-          this.store.dispatch(new wsAuth.AuthenticateSuccessAction(data));
+        this.socket.on('authenticated', () => {
+          this.store.dispatch(new wsAuth.AuthenticateSuccessAction());
         });
 
         this.socket.on('unauthorized', err => {
-          this.store.dispatch(new wsAuth.AuthenticateFailedAction({
+          this.store.dispatch(new wsAuth.AuthenticateFailureAction({
             error: err.message
           }));
         });
@@ -76,7 +61,10 @@ export class WsService {
         this.socket.on('disconnect', reason => {
           // if server is disconnected
           if (reason === 'transport close') {
-            this.disconnect();
+            this.store.dispatch(new wsAuth.DisconnectAction());
+            setTimeout(() => {
+              this.reconnect();
+            }, 1000);
           }
         });
 
@@ -95,14 +83,6 @@ export class WsService {
   }
 
   disconnect() {
-    this.store.dispatch(new wsAuth.DisconnectAction());
     this.socket.disconnect();
   }
-
-  // onAuthenticate() {
-  //   return Observable
-  //     .fromEventPattern(cb =>
-  //       this.socket.on('authenticate', cb)
-  // }
-
 }

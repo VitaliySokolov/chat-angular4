@@ -32,7 +32,7 @@ export function reducer(state = initialState, action): State {
       };
     }
 
-    case wsAuth.AUTHENTICATE_FAILED: {
+    case wsAuth.AUTHENTICATE_FAILURE: {
       const { error } = action.payload;
       return {
         ...state,

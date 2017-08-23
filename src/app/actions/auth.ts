@@ -3,10 +3,10 @@ import { Login } from '../models/login.model';
 
 export const LOGIN  = 'LOGIN';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
-export const LOGIN_FAILED = 'LOGIN_FAILED';
+export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 export const REGISTER  = 'REGISTER';
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
-export const REGISTER_FAILED = 'REGISTER_FAILED';
+export const REGISTER_FAILURE = 'REGISTER_FAILURE';
 export const LOGOUT = 'LOGOUT';
 export const CLEAR_ERROR_MESSAGE = 'CLEAR_ERROR_MESSAGE';
 
@@ -32,8 +32,8 @@ export class LoginSuccessAction implements Action {
   constructor(public payload?: Login) { }
 }
 
-export class LoginFailedAction implements Action {
-  readonly type = LOGIN_FAILED;
+export class LoginFailureAction implements Action {
+  readonly type = LOGIN_FAILURE;
 
   constructor(public payload?: any) { }
 }
