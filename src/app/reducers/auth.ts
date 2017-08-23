@@ -31,7 +31,7 @@ export function reducer(state = initialState, action): State {
         logged: false,
         id: '',
         token: '',
-      }
+      };
     }
 
     case auth.LOGIN_SUCCESS: {
@@ -62,7 +62,7 @@ export function reducer(state = initialState, action): State {
         ...state,
         registering: true,
         registered: false
-      }
+      };
     }
 
     case auth.REGISTER_SUCCESS: {
@@ -70,7 +70,7 @@ export function reducer(state = initialState, action): State {
         ...state,
         registering: false,
         registered: true
-      }
+      };
     }
 
     case auth.REGISTER_FAILED: {
@@ -80,7 +80,11 @@ export function reducer(state = initialState, action): State {
         registering: false,
         registered: false,
         error,
-      }
+      };
+    }
+
+    case auth.CLEAR_ERROR_MESSAGE: {
+      return state.error ? {...state, error: ''} : state;
     }
 
     case auth.LOGOUT: {
@@ -95,8 +99,10 @@ export function reducer(state = initialState, action): State {
 
 export const getLogged = (state: State) => state.logged;
 export const getLogging = (state: State) => state.logging;
+export const getLoginError = (state: State) => state.error;
 export const getRegistered = (state: State) => state.registered;
 export const getRegistering = (state: State) => state.registering;
+export const getRegisterError = (state: State) => state.error;
 export const getToken = (state: State) => state.token;
 export const getUser = (state: State) => ({
   id: state.id,

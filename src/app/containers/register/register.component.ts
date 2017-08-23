@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 
 import * as auth from '../../actions/auth';
 import * as fromRoot from '../../reducers';
+import {Observable} from 'rxjs/Observable';
 
 const MIN_LENGTH = 4;
 const MAX_LENGTH = 24;
@@ -23,6 +24,7 @@ const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
+  registerError$: Observable<string>;
   private registerForm: FormGroup;
 
   formErrors = {
@@ -63,6 +65,8 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.store.dispatch(new auth.ClearErrorMessageAction());
+    this.registerError$ = this.store.select(fromRoot.getRegisterError);
   }
 
   createForm() {
@@ -148,7 +152,7 @@ export class RegisterComponent implements OnInit {
       username: data.login,
       email: data.email,
       password: data.password
-    }
+    };
 
     this.store.dispatch(new auth.RegisterAction(user));
   }

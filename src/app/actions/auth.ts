@@ -8,6 +8,7 @@ export const REGISTER  = 'REGISTER';
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 export const REGISTER_FAILED = 'REGISTER_FAILED';
 export const LOGOUT = 'LOGOUT';
+export const CLEAR_ERROR_MESSAGE = 'CLEAR_ERROR_MESSAGE';
 
 export class LoginAction implements Action {
   readonly type = LOGIN;
@@ -35,4 +36,8 @@ export class LoginFailedAction implements Action {
   readonly type = LOGIN_FAILED;
 
   constructor(public payload?: any) { }
+}
+
+export class ClearErrorMessageAction implements Action {
+  readonly type = CLEAR_ERROR_MESSAGE;
 }

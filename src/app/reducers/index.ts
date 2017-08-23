@@ -37,8 +37,10 @@ export const getWsAuthState = (state: State) => state.wsAuth;
 
 export const getLogged = createSelector(getAuthState, fromAuth.getLogged);
 export const getLogging = createSelector(getAuthState, fromAuth.getLogging);
+export const getLoginError = createSelector(getAuthState, fromAuth.getLoginError);
 export const getRegistered = createSelector(getAuthState, fromAuth.getRegistered);
 export const getRegistering = createSelector(getAuthState, fromAuth.getRegistering);
+export const getRegisterError = createSelector(getAuthState, fromAuth.getRegisterError);
 export const getToken = createSelector(getAuthState, fromAuth.getToken);
 export const getUser = createSelector(getAuthState, fromAuth.getUser);
 
