@@ -25,7 +25,8 @@ import { WsAuthEffects } from './effects/ws-auth';
 
 import 'hammerjs';
 import { routes } from './routes';
-import { reducer } from './reducers';
+import {reducer} from './reducers';
+import {AuthGuard} from 'app/services/auth.guard';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,7 @@ import { reducer } from './reducers';
     EffectsModule.run(AuthEffects),
     EffectsModule.run(WsAuthEffects)
   ],
-  providers: [AuthService, WsService],
+  providers: [AuthService, WsService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
