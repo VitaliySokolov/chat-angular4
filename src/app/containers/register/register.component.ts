@@ -25,7 +25,7 @@ const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@
 })
 export class RegisterComponent implements OnInit {
   registerError$: Observable<string>;
-  private registerForm: FormGroup;
+  registerForm: FormGroup;
 
   formErrors = {
     'login': REQUIRED_FIELD_ERROR,

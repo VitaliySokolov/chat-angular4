@@ -21,7 +21,6 @@ export class WsService {
     private store: Store<appRoot.State>
   ) {
     console.log('ws start');
-    this.initSocket();
     this.store
       .select(appRoot.getToken)
       .subscribe(token => this.token = token);
@@ -85,18 +84,21 @@ export class WsService {
   }
 
   reconnect() {
-    this.socket.disconnect();
-    this.socket = null;
+    if (this.socket) {
+      this.socket.disconnect();
+      this.socket = null;
+    }
     this.initSocket();
   }
 
   disconnect() {
     this.socket.disconnect();
+    this.socket = null;
   }
 
   onEvent(eventName: string): void {
     this.socket.on(eventName, data => {
-      this.store.dispatch(new chatActions[chatActions.actionNameFromEvent(eventName)](data))
+      this.store.dispatch(new chatActions[chatActions.actionNameFromEvent(eventName)](data));
     });
   }
 
