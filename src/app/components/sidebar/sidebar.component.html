@@ -1,3 +1,8 @@
 <aside>
-  sidebar works!
+  <header>All users</header>
+  <ul>
+    <li *ngFor="let user of users">
+      <div class="username">{{user.username}}</div>
+    </li>
+  </ul>
 </aside>

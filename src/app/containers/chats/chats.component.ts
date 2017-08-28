@@ -4,9 +4,10 @@ import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/observable/combineLatest';
 
-import * as appRoot from '../../reducers';
+import * as AppStore from '../../reducers';
 import * as wsAuth from '../../actions/ws-auth';
-import { WsService } from '../../services/ws.service';
+import {WsService} from '../../services/ws.service';
+import {User} from '../../models/user.model';
 
 @Component({
   selector: 'ct-chats',
@@ -18,10 +19,11 @@ export class ChatsComponent implements OnInit, OnDestroy {
   private authenticating$: Observable<boolean>;
   private logged$: Observable<boolean>;
   private token$: Observable<string>;
+  private users$: Observable<User[]>;
   private subscriptions: Subscription[] = [];
 
   constructor(
-    // private store: Store<appRoot.State>,
+    private store: Store<AppStore.State>,
     // private wsService: WsService
   ) {
     // this.authenticated$ = this.store.select(chatRoot.getAuthenticated);
@@ -41,6 +43,7 @@ export class ChatsComponent implements OnInit, OnDestroy {
     //     }
     //   })
     // );
+    this.users$ = this.store.select(AppStore.getUsers);
   }
 
   ngOnDestroy() {

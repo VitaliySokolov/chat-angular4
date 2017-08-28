@@ -6,6 +6,9 @@ import { Observable } from 'rxjs/Observable';
 import * as appRoot from '../reducers';
 import { Store } from '@ngrx/store';
 import * as wsAuth from '../actions/ws-auth';
+import * as chatActions from '../actions/chat';
+
+import WS_EVENTS from '../../shared/socket.io/events';
 
 @Injectable()
 export class WsService {
@@ -68,6 +71,11 @@ export class WsService {
           }
         });
 
+        // when web sockets events are happened actions are dispatched
+        Object.keys(WS_EVENTS).forEach(key => {
+          this.onEvent(WS_EVENTS[key]);
+        });
+
         if (this.token) {
           this.store
             .dispatch(new wsAuth.AuthenticateAction({ token: this.token }));
@@ -84,5 +92,15 @@ export class WsService {
 
   disconnect() {
     this.socket.disconnect();
+  }
+
+  onEvent(eventName: string): void {
+    this.socket.on(eventName, data => {
+      this.store.dispatch(new chatActions[chatActions.actionNameFromEvent(eventName)](data))
+    });
+  }
+
+  emitEvent(eventName: string, data?: any): void {
+    this.socket.emit(eventName, ...data);
   }
 }

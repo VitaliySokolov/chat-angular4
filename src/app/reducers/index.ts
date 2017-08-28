@@ -8,15 +8,18 @@ import { combineReducers } from '@ngrx/store';
 
 import * as fromAuth from './auth';
 import * as fromWsAuth from './ws-auth';
+import * as fromChat from './chat';
 
 export interface State {
   auth: fromAuth.State;
   wsAuth: fromWsAuth.State;
+  chat: fromChat.State;
 }
 
 const reducers = {
   auth: fromAuth.reducer,
-  wsAuth: fromWsAuth.reducer
+  wsAuth: fromWsAuth.reducer,
+  chat: fromChat.reducer
 };
 
 export function createReducer(asyncReducers = {}): ActionReducer<any> {
@@ -34,6 +37,7 @@ export function reducer(state: any, action: any) {
 
 export const getAuthState = (state: State) => state.auth;
 export const getWsAuthState = (state: State) => state.wsAuth;
+export const getChatState = (state: State) => state.chat;
 
 export const getLogged = createSelector(getAuthState, fromAuth.getLogged);
 export const getLogging = createSelector(getAuthState, fromAuth.getLogging);
@@ -56,3 +60,5 @@ export const getError = createSelector(
 export const getConnected = createSelector(
   getWsAuthState, fromWsAuth.getConnected
 );
+
+export const getUsers = createSelector(getChatState, fromChat.getUsers);
