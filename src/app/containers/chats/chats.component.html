@@ -1,5 +1,10 @@
-<ct-sidebar [users]="users$ | async">
+<ct-sidebar [users]="users$ | async | async2array" [rooms]="rooms$ | async | async2array">
 </ct-sidebar>
 <main>
-  chats works!
+  <ul>
+    <li *ngFor="let message of messages$ | async | async2array">
+      {{message.msg}}
+    </li>
+  </ul>
+
 </main>

@@ -7,7 +7,9 @@ import 'rxjs/add/observable/combineLatest';
 import * as AppStore from '../../reducers';
 import * as wsAuth from '../../actions/ws-auth';
 import {WsService} from '../../services/ws.service';
-import {User} from '../../models/user.model';
+import {UserItems} from '../../models/user.model';
+import {RoomItems} from '../../models/room.model';
+import {MessageItems} from '../../models/message.model';
 
 @Component({
   selector: 'ct-chats',
@@ -15,11 +17,13 @@ import {User} from '../../models/user.model';
   styleUrls: ['./chats.component.scss']
 })
 export class ChatsComponent implements OnInit, OnDestroy {
+  users$: Observable<UserItems>;
+  rooms$: Observable<RoomItems>;
+  messages$: Observable<MessageItems>;
   private authenticated$: Observable<boolean>;
   private authenticating$: Observable<boolean>;
   private logged$: Observable<boolean>;
   private token$: Observable<string>;
-  private users$: Observable<User[]>;
   private subscriptions: Subscription[] = [];
 
   constructor(
@@ -44,6 +48,8 @@ export class ChatsComponent implements OnInit, OnDestroy {
     //   })
     // );
     this.users$ = this.store.select(AppStore.getUsers);
+    this.rooms$ = this.store.select(AppStore.getRooms);
+    this.messages$ = this.store.select(AppStore.getMessages)
   }
 
   ngOnDestroy() {

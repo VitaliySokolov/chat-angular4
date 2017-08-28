@@ -62,3 +62,5 @@ export const getConnected = createSelector(
 );
 
 export const getUsers = createSelector(getChatState, fromChat.getUsers);
+export const getRooms = createSelector(getChatState, fromChat.getRooms);
+export const getMessages = createSelector(getChatState, fromChat.getMessages);

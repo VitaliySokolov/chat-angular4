@@ -27,6 +27,7 @@ import 'hammerjs';
 import { routes } from './routes';
 import {reducer} from './reducers';
 import {AuthGuard} from 'app/services/auth.guard';
+import { Async2arrayPipe } from './pipes/async2array.pipe';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import {AuthGuard} from 'app/services/auth.guard';
     LoginComponent,
     RegisterComponent,
     NotFoundComponent,
+    Async2arrayPipe,
   ],
   imports: [
     BrowserModule,

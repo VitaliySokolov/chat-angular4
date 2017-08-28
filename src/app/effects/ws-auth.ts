@@ -25,6 +25,8 @@ export class WsAuthEffects {
     .do(() => {
       // TODO: send notification to snackbar
       this.wsService.emitEvent('users');
+      this.wsService.emitEvent('rooms');
+      this.wsService.emitEvent('messages');
     });
 
   @Effect()

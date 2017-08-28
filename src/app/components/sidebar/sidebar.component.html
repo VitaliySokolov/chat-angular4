@@ -2,7 +2,14 @@
   <header>All users</header>
   <ul>
     <li *ngFor="let user of users">
-      <div class="username">{{user.username}}</div>
+      <div class="user-name">{{user.username}}</div>
+    </li>
+  </ul>
+
+  <div class="rooms">All Rooms</div>
+  <ul>
+    <li *ngFor="let room of rooms">
+      <div class="room-title">{{room.title}}</div>
     </li>
   </ul>
 </aside>

@@ -9,6 +9,18 @@ export class UsersAction implements Action {
   constructor(public payload?: User[]) {}
 }
 
+export class RoomsAction implements Action {
+  readonly type = WS_EVENTS.ROOMS;
+
+  constructor(public payload?: User[]) {}
+}
+
+export class MessagesAction implements Action {
+  readonly type = WS_EVENTS.MESSAGES;
+
+  constructor(public payload?: User[]) {}
+}
+
 export class JoinAction implements Action {
   readonly type = WS_EVENTS.CHAT_JOIN;
 
