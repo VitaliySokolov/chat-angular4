@@ -1,7 +1,7 @@
 import {Action} from '@ngrx/store';
-import WS_EVENTS from '../../shared/socket.io/events';
+import WS_EVENTS from '../shared/socket.io/events';
 import {User} from '../models/user.model';
-import {pascalize} from 'shared/util';
+import {pascalize} from '../shared/util';
 
 export class UsersAction implements Action {
   readonly type = WS_EVENTS.USERS;

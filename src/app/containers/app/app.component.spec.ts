@@ -2,8 +2,11 @@ import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MaterialModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { Component } from '@angular/core';
-import { AppComponent } from './app.component';
+import {Component, NO_ERRORS_SCHEMA} from '@angular/core';
+import {Store} from '@ngrx/store';
+import {AppComponent} from './app.component';
+import {ComponentsModule} from '../../components/components.module';
+import {WsService} from '../../services/ws.service';
 
 @Component({
   template: '<div></div>'
@@ -11,11 +14,15 @@ import { AppComponent } from './app.component';
 class DummyComponent {
 }
 
+class StoreStub {}
+class WsServiceStub {}
+
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
         MaterialModule,
+        ComponentsModule,
         BrowserAnimationsModule,
         RouterTestingModule.withRoutes([
           { path: 'home', component: DummyComponent },
@@ -28,6 +35,11 @@ describe('AppComponent', () => {
         AppComponent,
         DummyComponent,
       ],
+      providers: [
+        {provide: Store, useValue: StoreStub},
+        {provide: WsService, useValue: WsServiceStub}
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   }));
 

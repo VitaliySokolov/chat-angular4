@@ -8,7 +8,7 @@ import { Store } from '@ngrx/store';
 import * as wsAuth from '../actions/ws-auth';
 import * as chatActions from '../actions/chat';
 
-import WS_EVENTS from '../../shared/socket.io/events';
+import WS_EVENTS from '../shared/socket.io/events';
 
 @Injectable()
 export class WsService {

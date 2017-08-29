@@ -1,11 +1,22 @@
-import { TestBed, inject } from '@angular/core/testing';
+import {TestBed, inject} from '@angular/core/testing';
+import {Store} from '@ngrx/store';
+import {Observable} from 'rxjs/Observable';
 
-import { WsService } from './ws.service';
+import {WsService} from './ws.service';
+
+class StoreStub {
+  select() {
+    return Observable.of(true);
+  }
+}
 
 describe('WsService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [WsService]
+      providers: [
+        WsService,
+        {provide: Store, useClass: StoreStub},
+      ]
     });
   });
 

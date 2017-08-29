@@ -4,7 +4,7 @@ import {Actions, Effect, toPayload} from '@ngrx/effects';
 import {Observable} from 'rxjs/Observable';
 
 import {WsService} from '../services/ws.service';
-import WS_EVENTS from '../../shared/socket.io/events';
+import WS_EVENTS from '../shared/socket.io/events';
 import * as chatActions from '../actions/chat';
 
 @Injectable()

@@ -1,8 +1,8 @@
-import WS_EVENTS from '../../shared/socket.io/events';
+import WS_EVENTS from '../shared/socket.io/events';
 
 import {UserItems} from '../models/user.model';
 import {Room, commonRoom, RoomItems} from '../models/room.model';
-import {array2object} from '../../shared/util';
+import {array2object} from '../shared/util';
 import {MessageItems} from '../models/message.model';
 
 export interface State {
