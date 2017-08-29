@@ -1,9 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
 @import './scss/base/colors';
+@import './scss/base/reset';
 @import './scss/messages';
-
-body {
-  padding: 0;
-  margin: 0;
-  background-color: $primary-light;
-}
