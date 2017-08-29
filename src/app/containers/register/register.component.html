@@ -33,4 +33,6 @@
       <button md-button color="primary" class="register-btn" [disabled]="registerForm.pristine || registerForm.invalid">Register</button>
     </div>
   </form>
+  <ct-spinner *ngIf="registering$ | async">
+  </ct-spinner>
 </main>

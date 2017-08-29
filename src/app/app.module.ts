@@ -3,8 +3,9 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
-import { MaterialModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import 'hammerjs';
+import { SharedModule } from './shared/shared.module';
 
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -23,11 +24,13 @@ import { WsService } from './services/ws.service';
 import { AuthEffects } from './effects/auth';
 import { WsAuthEffects } from './effects/ws-auth';
 
-import 'hammerjs';
-import { routes } from './routes';
-import {reducer} from './reducers';
-import {AuthGuard} from 'app/services/auth.guard';
+import { AuthGuard } from 'app/services/auth.guard';
+
 import { Async2arrayPipe } from './pipes/async2array.pipe';
+
+import { routes } from './routes';
+import { reducer } from './reducers';
+
 
 @NgModule({
   declarations: [
@@ -40,11 +43,11 @@ import { Async2arrayPipe } from './pipes/async2array.pipe';
     Async2arrayPipe,
   ],
   imports: [
+    SharedModule,
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
-    MaterialModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(routes, { useHash: true }),
     ComponentsModule,

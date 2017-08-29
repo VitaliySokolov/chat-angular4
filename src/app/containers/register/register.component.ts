@@ -25,6 +25,7 @@ const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@
 })
 export class RegisterComponent implements OnInit {
   registerError$: Observable<string>;
+  registering$: Observable<boolean>;
   registerForm: FormGroup;
 
   formErrors = {
@@ -67,6 +68,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
     this.store.dispatch(new auth.ClearErrorMessageAction());
     this.registerError$ = this.store.select(fromRoot.getRegisterError);
+    this.registering$ = this.store.select(fromRoot.getRegistering);
   }
 
   createForm() {

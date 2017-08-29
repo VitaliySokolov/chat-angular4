@@ -21,4 +21,6 @@
       <button type="submit" md-button color="primary" class="login-btn" id="submit" [disabled]="loginForm.pristine || loginForm.invalid">Login</button>
     </div>
   </form>
+  <ct-spinner *ngIf="logging$ | async">
+  </ct-spinner>
 </main>

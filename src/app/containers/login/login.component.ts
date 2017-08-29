@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   logged: boolean;
   loginError$: Observable<string>;
+  logging$: Observable<boolean>;
 
   constructor(
     private fb: FormBuilder,
@@ -36,6 +37,7 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/home']);
     }
     this.loginError$ = this.store.select(fromRoot.getLoginError);
+    this.logging$ = this.store.select(fromRoot.getLogging);
   }
 
   createForm() {
