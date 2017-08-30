@@ -5,6 +5,7 @@ import { AuthbarComponent } from './authbar/authbar.component';
 import { LogoutComponent } from './logout/logout.component';
 import {SidebarComponent} from './sidebar/sidebar.component';
 import {SpinnerComponent} from './spinner/spinner.component';
+import {MessageSenderComponent} from './message-sender/message-sender.component';
 
 @NgModule({
   imports: [
@@ -15,14 +16,16 @@ import {SpinnerComponent} from './spinner/spinner.component';
     AuthbarComponent,
     LogoutComponent,
     SidebarComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    MessageSenderComponent
   ],
   exports: [
     NgLogoComponent,
     AuthbarComponent,
     LogoutComponent,
     SidebarComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    MessageSenderComponent
   ]
 })
 export class ComponentsModule { }

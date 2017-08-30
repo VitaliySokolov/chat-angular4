@@ -4,6 +4,7 @@ import {UserItems} from '../models/user.model';
 import {Room, commonRoom, RoomItems} from '../models/room.model';
 import {array2object} from '../shared/util';
 import {MessageItems} from '../models/message.model';
+import {oldMessagesToNew, oldMessageToNew} from '../models/old-message.model';
 
 export interface State {
   users: UserItems;
@@ -28,7 +29,10 @@ export function reducer(state = initialState, action): State {
         ...state,
         users: {
           ...state.users,
-          items
+          items: {
+            ...state.users ? state.users.items : {},
+            ...items
+          }
         },
       };
     }
@@ -50,12 +54,31 @@ export function reducer(state = initialState, action): State {
 
     case WS_EVENTS.MESSAGES: {
       const {messages, roomId} = action.payload,
-        items = array2object(messages, 'id');
+        items = array2object(oldMessagesToNew(messages), 'id');
       return {
         ...state,
         messages: {
           ...state.messages,
-          items
+          items: {
+            ...state.messages ? state.messages.items : {},
+            ...items
+          }
+        },
+      };
+    }
+
+    case WS_EVENTS.MESSAGE: {
+      console.log(action.payload);
+      const message = action.payload,
+        items = array2object([oldMessageToNew(message)], 'id');
+      return {
+        ...state,
+        messages: {
+          ...state.messages,
+          items: {
+            ...state.messages.items,
+            ...items
+          }
         },
       };
     }

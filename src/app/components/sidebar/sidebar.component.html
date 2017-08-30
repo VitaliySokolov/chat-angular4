@@ -1,15 +1,25 @@
 <aside>
-  <header>All users</header>
-  <ul>
-    <li *ngFor="let user of users">
-      <div class="user-name">{{user.username}}</div>
-    </li>
-  </ul>
+  <md-sidenav-container>
+    <md-sidenav class="vs-sidenav" #sidebar mode="side" opened="true">
+    <!-- <button md-button (click)="sidebar.toggle()">Open</button> -->
+      <md-tab-group>
+        <md-tab label="All Users">
+          <ul>
+            <li *ngFor="let user of users">
+              <div class="user-name">{{user.username}}</div>
+            </li>
+          </ul>
+        </md-tab>
+        <md-tab label="All Rooms">
+          <ul>
+            <li *ngFor="let room of rooms">
+              <div class="room-title">{{room.title}}</div>
+            </li>
+          </ul>
+        </md-tab>
+      </md-tab-group>
+    </md-sidenav>
 
-  <div class="rooms">All Rooms</div>
-  <ul>
-    <li *ngFor="let room of rooms">
-      <div class="room-title">{{room.title}}</div>
-    </li>
-  </ul>
+    <!-- <button md-button (click)="sidebar.open()">Open</button> -->
+  </md-sidenav-container>
 </aside>

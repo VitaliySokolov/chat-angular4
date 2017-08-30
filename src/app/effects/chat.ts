@@ -8,15 +8,15 @@ import WS_EVENTS from '../shared/socket.io/events';
 import * as chatActions from '../actions/chat';
 
 @Injectable()
-export class WsAuthEffects {
+export class ChatEffects {
 
-  // @Effect()
-  // users$: Observable<Action> = this.actions$
-  //   .ofType(WS_EVENTS.CHAT_JOIN)
-  //   .map(toPayload)
-  //   .do(payload =>
-  //     this.wsService.)
-  //   );
+  @Effect({dispatch: false})
+  sendMessage$: Observable<Action> = this.actions$
+    .ofType(chatActions.WS_SEND_MESSAGE)
+    .map(toPayload)
+    .do(payload =>
+      this.wsService.emitEvent(WS_EVENTS.MESSAGE, payload.text)
+    );
 
   constructor(
     private wsService: WsService,

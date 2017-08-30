@@ -1,0 +1,6 @@
+<form [formGroup]="sendForm" class="send-message-form" (ngSubmit)="onSubmit()">
+  <md-input-container class="send-message">
+    <input mdInput placeholder="Send message" formControlName="newMessage" name="newMessage" id="newMessage" />
+  </md-input-container>
+  <button md-button type="submit" color="primary" class="send-btn" id="submit" [disabled]="sendForm.pristine || sendForm.invalid">Send</button>
+</form>

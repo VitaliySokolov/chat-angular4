@@ -2,6 +2,9 @@ import {Action} from '@ngrx/store';
 import WS_EVENTS from '../shared/socket.io/events';
 import {User} from '../models/user.model';
 import {pascalize} from '../shared/util';
+import {Message} from '../models/message.model';
+
+export const WS_SEND_MESSAGE = 'WS_SEND_MESSAGE';
 
 export class UsersAction implements Action {
   readonly type = WS_EVENTS.USERS;
@@ -35,3 +38,21 @@ export class LeaveAction implements Action {
 
 export const actionNameFromEvent = (eventName: string): string =>
   pascalize(eventName) + 'Action';
+
+export class SendMessageAction implements Action {
+  readonly type = WS_SEND_MESSAGE;
+
+  constructor(public payload: Message) {}
+}
+
+export class MessageAction implements Action {
+  readonly type = WS_EVENTS.MESSAGE;
+
+  constructor(public payload?: any) {}
+}
+
+export class ErrorMessageAction implements Action {
+  readonly type = WS_EVENTS.ERROR_MESSAGE;
+
+  constructor(public payload?: any) {}
+}

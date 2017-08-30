@@ -3,8 +3,10 @@
 <main>
   <ul>
     <li *ngFor="let message of messages$ | async | async2array">
-      {{message.msg}}
+      <div class="author">{{message.author.username}}</div>
+      <div class="message">{{message.text}}</div>
+      <div class="time">{{message.sentAt}}</div>
     </li>
   </ul>
-
+  <ct-message-sender></ct-message-sender>
 </main>

@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -23,6 +22,7 @@ import { AuthService } from './services/auth.service';
 import { WsService } from './services/ws.service';
 import { AuthEffects } from './effects/auth';
 import { WsAuthEffects } from './effects/ws-auth';
+import { ChatEffects } from './effects/chat';
 
 import { AuthGuard } from 'app/services/auth.guard';
 
@@ -45,8 +45,6 @@ import { reducer } from './reducers';
   imports: [
     SharedModule,
     BrowserModule,
-    FormsModule,
-    ReactiveFormsModule,
     HttpModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(routes, { useHash: true }),
@@ -54,7 +52,8 @@ import { reducer } from './reducers';
     StoreModule.provideStore(reducer),
     StoreDevtoolsModule.instrumentOnlyWithExtension(),
     EffectsModule.run(AuthEffects),
-    EffectsModule.run(WsAuthEffects)
+    EffectsModule.run(WsAuthEffects),
+    EffectsModule.run(ChatEffects)
   ],
   providers: [AuthService, WsService, AuthGuard],
   bootstrap: [AppComponent]
