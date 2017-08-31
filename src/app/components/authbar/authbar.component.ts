@@ -7,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class AuthbarComponent implements OnInit {
   @Input() user: any;
-  @Input() online: boolean;
+  @Input() lineStatus: boolean;
 
   constructor() { }
 

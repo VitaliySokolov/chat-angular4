@@ -6,13 +6,17 @@
         <md-tab label="All Users">
           <ul>
             <li *ngFor="let user of users">
-              <div class="user-name">{{user.username}}</div>
+              <div class="user-name">
+                <ct-avatar [name]="user.username" [lineStatus]="user.online"></ct-avatar>
+                {{user.username}}
+              </div>
             </li>
           </ul>
         </md-tab>
         <md-tab label="All Rooms">
           <ul>
             <li *ngFor="let room of rooms">
+              <ct-avatar [name]="room.title" [showStatus]="false" [round]="false"></ct-avatar>
               <div class="room-title">{{room.title}}</div>
             </li>
           </ul>

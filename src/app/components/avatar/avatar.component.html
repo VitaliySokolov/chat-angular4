@@ -1,0 +1,18 @@
+<div class="avatar"
+  [class.round]="round"
+  [ngStyle]="{
+    'width': size + 'px',
+    'height': size + 'px',
+    'line-height': size + 'px',
+    'font-size': (size / 2) + 'px',
+    'background-color': bgColor
+  }">
+  <span class="name">{{name[0] | uppercase}}</span>
+  <span *ngIf="showStatus" class="status round"
+    [class.online]="lineStatus"
+    [ngStyle]="{
+      'width': (size / 3) + 'px',
+      'height': (size / 3) + 'px'
+    }"
+    ></span>
+</div>

@@ -1,0 +1,29 @@
+$onlineColor:#218B21;
+$offlineColor: gray;
+$blickColor: white;
+
+.avatar {
+  background-color: #000;
+  color: #fff;
+  display: inline-block;
+  position: relative;
+  text-align: center;
+}
+
+.round {
+  border-radius: 50%;
+}
+
+.status {
+  background-color: $offlineColor;
+  background-image: radial-gradient(closest-side at 30% 30%, $blickColor, $offlineColor);
+  display: inline-block;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.online {
+  background-color: $onlineColor;
+  background-image: radial-gradient(closest-side at 30% 30%, $blickColor, $onlineColor);
+}

@@ -25,7 +25,7 @@
       mdTooltip="Register">
         <md-icon color="secondary">assignment</md-icon>
     </button>
-    <ct-authbar *ngIf="logged$ | async" [user]="user$ | async" [online]="connected$ | async"></ct-authbar>
+    <ct-authbar *ngIf="logged$ | async" [user]="user$ | async" [lineStatus]="connected$ | async"></ct-authbar>
     <button *ngIf="logged$ | async"
       id="logout"
       md-button

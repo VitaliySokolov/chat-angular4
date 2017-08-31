@@ -1,7 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {NO_ERRORS_SCHEMA} from '@angular/core';
+import {By} from '@angular/platform-browser';
 
 import {AuthbarComponent} from './authbar.component';
-import {By} from '@angular/platform-browser';
+import { AvatarComponent } from './../avatar/avatar.component';
 
 describe('AuthbarComponent', () => {
   let component: AuthbarComponent;
@@ -12,7 +14,8 @@ describe('AuthbarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AuthbarComponent ]
+      declarations: [ AuthbarComponent ],
+      schemas: [NO_ERRORS_SCHEMA]
     })
     .compileComponents();
   }));
@@ -35,22 +38,4 @@ describe('AuthbarComponent', () => {
     expect(userName.textContent.trim()).not.toBe('');
   });
 
-  it('should indicate online', () => {
-    const expectedClass = 'green';
-    component.user = user1;
-    component.online = true;
-    fixture.detectChanges();
-    const avatar = fixture.debugElement.query(By.css('.avatar')).nativeElement;
-    expect(avatar.classList).toContain(expectedClass);
-  });
-
-  it('should indicate offline', () => {
-    const expectedClass = 'green';
-    component.user = user1;
-    component.online = false;
-    fixture.detectChanges();
-    const avatar = fixture.debugElement.query(By.css('.avatar')).nativeElement;
-    expect(avatar.classList).not.toContain(expectedClass);
-
-  });
 });
