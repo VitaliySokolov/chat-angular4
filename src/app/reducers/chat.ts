@@ -68,7 +68,6 @@ export function reducer(state = initialState, action): State {
     }
 
     case WS_EVENTS.MESSAGE: {
-      console.log(action.payload);
       const message = action.payload,
         items = array2object([oldMessageToNew(message)], 'id');
       return {
@@ -77,6 +76,46 @@ export function reducer(state = initialState, action): State {
           ...state.messages,
           items: {
             ...state.messages.items,
+            ...items
+          }
+        },
+      };
+    }
+
+    case WS_EVENTS.CHAT_JOIN: {
+      const {user, time} = action.payload;
+      let items = {};
+      if (state.users && state.users.items[user.id]) {
+        items = {[user.id]: {...state.users.items[user.id], online: true}};
+      } else {
+        items = {[user.id]: {...user, online: true}};
+      }
+      return {
+        ...state,
+        users: {
+          ...state.users,
+          items: {
+            ...state.users ? state.users.items : {},
+            ...items
+          }
+        },
+      };
+    }
+
+    case WS_EVENTS.CHAT_LEAVE: {
+      const {user, time} = action.payload;
+      let items = {};
+      if (state.users && state.users.items[user.id]) {
+        items = {[user.id]: {...state.users.items[user.id], online: false}};
+      } else {
+        items = {[user.id]: {...user, online: false}};
+      }
+      return {
+        ...state,
+        users: {
+          ...state.users,
+          items: {
+            ...state.users ? state.users.items : {},
             ...items
           }
         },
