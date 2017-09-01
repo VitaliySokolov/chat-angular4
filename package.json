@@ -7,11 +7,11 @@
     "start": "ng serve",
     "build": "ng build",
     "prod": "ng build --prod",
-    "test": "ng test --single-run",
+    "test": "ng test --single-run --code-coverage",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "build-prod": "ng build --prod --aot false --env prod --bh /chat-angular4/",
-    "coveralls": "ng test --single-run --code-coverage | coveralls",
+    "coveralls": "cat coverage/lcov.info | coveralls",
     "tdd": "ng test"
   },
   "private": true,
