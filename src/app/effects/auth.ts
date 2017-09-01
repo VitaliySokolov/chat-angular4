@@ -4,7 +4,12 @@ import {Action} from '@ngrx/store';
 import {Actions, Effect, toPayload} from '@ngrx/effects';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/from';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/catch';
 
 import {AuthService} from '../services/auth.service';
 import * as auth from '../actions/auth';
