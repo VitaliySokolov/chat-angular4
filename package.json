@@ -10,7 +10,7 @@
     "test": "ng test --single-run",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build-prod": "ng build --prod --env prod --bh /chat-angular4/",
+    "build-prod": "ng build --prod --aot false --env prod --bh /chat-angular4/",
     "coveralls": "ng test --single-run --code-coverage | coveralls",
     "tdd": "ng test"
   },
