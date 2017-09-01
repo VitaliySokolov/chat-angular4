@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-// import { Subscription } from "rxjs/Subscription";
 
 import * as Auth from '../../actions/auth';
 import * as AppStore from '../../reducers';
-import { WsService } from '../../services/ws.service';
 
 @Component({
   selector: 'ct-root',
@@ -16,11 +14,9 @@ export class AppComponent implements OnInit {
   logged$: Observable<boolean>;
   user$: Observable<any>;
   connected$: Observable<boolean>;
-  // subscriptions: Subscription[] = [];
 
   constructor(
-    private store: Store<AppStore.State>,
-    private wsService: WsService
+    private store: Store<AppStore.State>
   ) { }
 
   ngOnInit() {
@@ -28,11 +24,6 @@ export class AppComponent implements OnInit {
     this.logged$ = this.store.select(AppStore.getLogged);
     this.user$ = this.store.select(AppStore.getUser);
     this.connected$ = this.store.select(AppStore.getAuthenticated);
-    // this.subscriptions.push(
-    //   this.logged$.subscribe(logged => this.logged = logged),
-    //   this.user$.subscribe()
-    // );
-    // this.store.select(AppStore.getUser).subscribe(user => this.user = user);
   }
 
   autoLogin() {

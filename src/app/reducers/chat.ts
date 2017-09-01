@@ -1,133 +1,31 @@
-import WS_EVENTS from '../shared/socket.io/events';
+import { createSelector } from 'reselect';
 
-import {UserItems} from '../models/user.model';
-import {Room, commonRoom, RoomItems} from '../models/room.model';
-import {array2object} from '../shared/util';
-import {MessageItems} from '../models/message.model';
-import {oldMessagesToNew, oldMessageToNew} from '../models/old-message.model';
+import { createReducer } from './helpers';
+
+import * as fromUsers from './users';
+import * as fromRooms from './rooms';
+import * as fromMessages from './messages';
 
 export interface State {
-  users: UserItems;
-  rooms: RoomItems;
-  messages: MessageItems;
+  users: fromUsers.State;
+  rooms: fromRooms.State;
+  messages: fromMessages.State;
 }
 
-export const initialState: State = {
-  users: null,
-  rooms: {
-    items: {[commonRoom.id]: commonRoom}
-  },
-  messages: null
+const reducers = {
+  users: fromUsers.reducer,
+  rooms: fromRooms.reducer,
+  messages: fromMessages.reducer
 };
 
-export function reducer(state = initialState, action): State {
-  switch (action.type) {
-    case WS_EVENTS.USERS: {
-      const {users} = action.payload,
-        items = array2object(users, 'id');
-      return {
-        ...state,
-        users: {
-          ...state.users,
-          items: {
-            ...state.users ? state.users.items : {},
-            ...items
-          }
-        },
-      };
-    }
-
-    case WS_EVENTS.ROOMS: {
-      const {rooms} = action.payload,
-        items = array2object(rooms, 'id');
-      return {
-        ...state,
-        rooms: {
-          ...state.rooms,
-          items: {
-            ...state.rooms.items,
-            ...items
-          }
-        }
-      };
-    }
-
-    case WS_EVENTS.MESSAGES: {
-      const {messages, roomId} = action.payload,
-        items = array2object(oldMessagesToNew(messages), 'id');
-      return {
-        ...state,
-        messages: {
-          ...state.messages,
-          items: {
-            ...state.messages ? state.messages.items : {},
-            ...items
-          }
-        },
-      };
-    }
-
-    case WS_EVENTS.MESSAGE: {
-      const message = action.payload,
-        items = array2object([oldMessageToNew(message)], 'id');
-      return {
-        ...state,
-        messages: {
-          ...state.messages,
-          items: {
-            ...state.messages.items,
-            ...items
-          }
-        },
-      };
-    }
-
-    case WS_EVENTS.CHAT_JOIN: {
-      const {user, time} = action.payload;
-      let items = {};
-      if (state.users && state.users.items[user.id]) {
-        items = {[user.id]: {...state.users.items[user.id], online: true}};
-      } else {
-        items = {[user.id]: {...user, online: true}};
-      }
-      return {
-        ...state,
-        users: {
-          ...state.users,
-          items: {
-            ...state.users ? state.users.items : {},
-            ...items
-          }
-        },
-      };
-    }
-
-    case WS_EVENTS.CHAT_LEAVE: {
-      const {user, time} = action.payload;
-      let items = {};
-      if (state.users && state.users.items[user.id]) {
-        items = {[user.id]: {...state.users.items[user.id], online: false}};
-      } else {
-        items = {[user.id]: {...user, online: false}};
-      }
-      return {
-        ...state,
-        users: {
-          ...state.users,
-          items: {
-            ...state.users ? state.users.items : {},
-            ...items
-          }
-        },
-      };
-    }
-
-    default: {
-      return state;
-    }
-  }
+export function reducer(state: any, action: any) {
+  return createReducer(reducers)(state, action);
 }
 
 export const getUsers = (state: State) => state.users;
 export const getRooms = (state: State) => state.rooms;
 export const getMessages = (state: State) => state.messages;
+
+export const getUsersLoading = createSelector(getUsers, fromUsers.getUsersLoading);
+export const getRoomsLoading = createSelector(getRooms, fromRooms.getRoomsLoading);
+export const getMessagesLoading = createSelector(getMessages, fromMessages.getMessagesLoading);

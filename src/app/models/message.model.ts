@@ -10,6 +10,6 @@ export class Message {
   editedAt?: Date;
 }
 
-export interface MessageItems {
-  items: { [key: string]: Message; };
+export interface Messages {
+  [key: string]: Message;
 }

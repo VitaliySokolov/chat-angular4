@@ -26,6 +26,6 @@ export class Room {
 
 export const commonRoom = new Room('Common Room', '0');
 
-export interface RoomItems {
-  items: { [key: string]: Room; };
+export interface Rooms {
+  [key: string]: Room;
 }

@@ -7,6 +7,6 @@ export class User {
   online?: boolean;
 }
 
-export interface UserItems {
-  items: { [key: string]: User; };
+export interface Users {
+  [key: string]: User;
 }

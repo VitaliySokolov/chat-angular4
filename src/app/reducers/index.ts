@@ -1,10 +1,5 @@
-import { isDevMode } from '@angular/core';
 import { createSelector } from 'reselect';
-import { ActionReducer } from '@ngrx/store';
-import { environment } from '../../environments/environment';
-import { compose } from '@ngrx/core/compose';
-import { storeFreeze } from 'ngrx-store-freeze';
-import { combineReducers } from '@ngrx/store';
+import { createReducer } from './helpers';
 
 import * as fromAuth from './auth';
 import * as fromWsAuth from './ws-auth';
@@ -22,16 +17,8 @@ const reducers = {
   chat: fromChat.reducer
 };
 
-export function createReducer(asyncReducers = {}): ActionReducer<any> {
-  if (isDevMode()) {
-    return compose(storeFreeze, combineReducers)(Object.assign(reducers, asyncReducers));
-  }
-
-  return combineReducers(Object.assign(reducers, asyncReducers));
-}
-
 export function reducer(state: any, action: any) {
-  return createReducer()(state, action);
+  return createReducer(reducers)(state, action);
 }
 // export const extendedReducer = createReducer(reducers);
 
