@@ -7,10 +7,12 @@
     "start": "ng serve",
     "build": "ng build",
     "prod": "ng build --prod",
-    "test": "ng test",
+    "test": "ng test --single-run",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build-prod": "cross-env NODE_ENV=production ng build --prod"
+    "build-prod": "ng build --prod --env prod --bh /chat-angular4/",
+    "coveralls": "ng test --single-run --code-coverage | coveralls",
+    "tdd": "ng test"
   },
   "private": true,
   "dependencies": {
@@ -43,6 +45,7 @@
     "@types/jasmine": "2.5.38",
     "@types/node": "~6.0.60",
     "codelyzer": "~2.0.0",
+    "coveralls": "^2.13.1",
     "dotenv": "^4.0.0",
     "jasmine-core": "~2.5.2",
     "jasmine-spec-reporter": "~3.2.0",
