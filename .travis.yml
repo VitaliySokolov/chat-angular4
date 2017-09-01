@@ -3,7 +3,7 @@ node_js:
 - stable
 install:
 - npm install
-- ng run build-prod
+- npm run build-prod
 script:
 - npm test
 after_success:
