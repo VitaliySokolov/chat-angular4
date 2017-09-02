@@ -20,7 +20,6 @@ export class WsService {
   constructor(
     private store: Store<appRoot.State>
   ) {
-    console.log('ws start');
     this.store
       .select(appRoot.getToken)
       .subscribe(token => this.token = token);
@@ -45,9 +44,7 @@ export class WsService {
   initSocket() {
     if (!this.socket) {
       this.socket = io(SERVER);
-      console.log('after create socket');
       this.socket.on('connect', () => {
-        console.log('before connect action');
         this.store.dispatch(new wsAuth.ConnectAction());
 
         this.socket.on('authenticated', () => {
